@@ -8,12 +8,15 @@ $method = $_SERVER['REQUEST_METHOD'];
 $path = rtrim($_SERVER['PATH_INFO'] ?? '', '/');
 
 // $path = rtrim($_SERVER['SCRIPT_NAME'] ?? '','/');
-// Σε περίπτωση που τρέχουμε php –S 
+// EL: Εναλλακτική για τον ενσωματωμένο server PHP (php -S).
+// EN: Alternative for the built-in PHP server (php -S).
 
 $input = json_decode(file_get_contents('php://input'), true);
 
-// Κάθε έκφραση ελέγχει ολόκληρο το PATH_INFO.
-// Οι τελικές κάθετοι αφαιρούνται πριν από τον έλεγχο.
+// EL: Κάθε έκφραση ελέγχει ολόκληρο το PATH_INFO.
+// EN: Each expression matches the entire PATH_INFO value.
+// EL: Οι τελικές κάθετοι αφαιρούνται πριν από τον έλεγχο.
+// EN: Trailing slashes are removed before matching.
 
 if (preg_match('#^/v1/board$#D', $path)) {
       handle_board($method);
@@ -26,7 +29,7 @@ if (preg_match('#^/v1/board$#D', $path)) {
     handle_player($method, $players, $input);
 } else {
     header('HTTP/1.1 404 Not Found');
-    print '<h1>not FOUND</h1>';
+    print '<h1>Page not found</h1>';
     exit;
 }
 

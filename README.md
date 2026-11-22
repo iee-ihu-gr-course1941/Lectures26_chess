@@ -1,2 +1,2 @@
 # Lectures26_chess
-Το Σκάκι
+Chess
